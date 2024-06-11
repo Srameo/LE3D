@@ -6,7 +6,7 @@ This repository contains the official implementation of the following paper:
 > <b>L</b>ighting <b>E</b>very Darkness with <b>3D</b>GS: Fast Training and Real-Time Rendering for HDR View Synthesis<br/>
 > [Xin Jin](https://srameo.github.io)<sup>\*</sup>, [Pengyi Jiao](https://github.com/VictorJiao)<sup>\*</sup>, [Zheng-Peng Duan](https://mmcheng.net/dzp/), [Xingchao Yang](https://scholar.google.com/citations?user=OkhB4Y8AAAAJ&hl=zh-CN), [Chunle Guo](https://mmcheng.net/clguo/)<sup>\#</sup>, [Bo Ren](http://ren-bo.net/)<sup>\#</sup>, [Chongyi Li](https://li-chongyi.github.io/)<br/>
 > (\* denotes equal contribution. \# denotes the corresponding author.)<br/>
-> arxiv preprint, \[[Homepage](https://srameo.github.io/projects/le3d/)\], \[[Paper Link]()\]
+> arxiv preprint, \[[Homepage](https://srameo.github.io/projects/le3d/)\], \[[Paper Link](https://arxiv.org/abs/2406.06216)\]
 
 Stay tuned for editing your own 3D scene!
 
