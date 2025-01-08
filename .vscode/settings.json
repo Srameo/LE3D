@@ -1,0 +1,17 @@
+{
+    "files.trimTrailingWhitespace": true,
+    "editor.wordWrap": "on",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "files.associations": {
+        "memory_resource": "cpp",
+        "concepts": "cpp",
+        "string_view": "cpp",
+        "ranges": "cpp",
+        "tuple": "cpp"
+    }
+}

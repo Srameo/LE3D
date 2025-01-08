@@ -1,0 +1,107 @@
+pipe_type: GSBasePipeline
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+datasets:
+  train:
+    type: ColmapDataset
+    image_dir: images
+    image_suffix: jpg
+    meta_dir: ~
+    max_width: 2016
+    llffhold: 20
+
+  val:
+    type: ColmapDataset
+    image_dir: images
+    image_suffix: jpg
+    meta_dir: ~
+    max_width: 2016
+    split: val
+    llffhold: 20
+
+network_g:
+  type: GaussianBaseModel
+  sh_degree: 3
+  sh_degree_up_per_iter: 1000
+  densify_from_iter: 500
+  densify_until_iter: 15000
+  densification_interval: 100
+  densify_grad_threshold: 0.0002
+  opacity_reset_interval: 3000
+  prune_opacity_threshold: 0.005
+  percent_dense: 0.01
+  convert_SHs_python: true
+
+# path
+path:
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  ema_decay: 0
+  optim_g:
+    type: Adam
+    lr: 0.0
+    eps: 1.0e-15
+    detailed_lr:
+      position:     0.00016
+      feature_dc:   0.0025
+      feature_rest: 0.000125
+      opacity:      0.05
+      scaling:      0.005
+      rotation:     0.001
+    weight_decay: 0
+    betas: [0.9, 0.999]
+
+  scheduler:
+    type: ExponentialLR
+    target: xyz
+    lr_init: 0.00016
+    lr_final: 0.0000016
+    lr_delay_steps: 0
+    lr_delay_mult: 0.01
+    max_steps: 30000
+
+  total_iter: 30000
+  warmup_iter: -1  # no warm up
+
+  # losses
+  pixel_opts:
+  - type: L1Loss
+    loss_weight: 0.8
+    reduction: mean
+  - type: SSIMLoss
+    loss_weight: 0.2
+    reduction: mean
+
+# validation settings
+val:
+  render_depth: true
+  val_freq: [7000, 15000, 24000, 30000]
+  save_img: true
+  suffix: ~
+  save_as: jpg
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+
+    ssim: # metric name, can be arbitrary
+      type: calculate_ssim
+      crop_border: 0
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: [7000, 30000]
+  save_in_ply: true
+  use_tb_logger: true
+
+viewer:
+  type: BaseViewer
+  update_freq: 1
+  port: 8097

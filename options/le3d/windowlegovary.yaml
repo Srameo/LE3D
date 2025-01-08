@@ -1,0 +1,15 @@
+base: options/le3d/base_wme.yaml
+
+name: le3d/windowlegovary
+
+datasets:
+  train:
+    name: rawnerf_windowlegovary_train
+    scene_root: datasets/rawnerf/scenes/windowlegovary_pinhole
+
+  val:
+    name: rawnerf_windowlegovary_val
+    scene_root: datasets/rawnerf/scenes/windowlegovary_pinhole
+
+network_g:
+  init_ply_path: datasets/rawnerf/scenes/windowlegovary_pinhole/sparse/0/points3D.ply

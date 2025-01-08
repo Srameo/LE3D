@@ -1,0 +1,12 @@
+[submodule "submodules/third_party/glm"]
+	path = submodules/third_party/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "submodules/simple-knn"]
+	path = submodules/simple-knn
+	url = https://gitlab.inria.fr/bkerbl/simple-knn.git
+[submodule "submodules/colmap"]
+	path = submodules/colmap
+	url = https://github.com/colmap/colmap.git
+[submodule "submodules/hdr-splat"]
+	path = submodules/hdr-splat
+	url = https://github.com/Srameo/hdr-splat.git

@@ -1,0 +1,15 @@
+base: options/vanilla_gs/base.yaml
+
+name: vanilla_gs/db_drjohnson
+
+datasets:
+  train:
+    name: db_drjohnson_train
+    scene_root: datasets/tandt_db/db/drjohnson
+
+  val:
+    name: db_drjohnson_val
+    scene_root: datasets/tandt_db/db/drjohnson
+
+network_g:
+  init_ply_path: datasets/tandt_db/db/drjohnson/sparse/0/points3D.ply

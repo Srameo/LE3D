@@ -1,0 +1,18 @@
+base: options/le3d/base.yaml
+
+network_g:
+  multi_exposure_training: &multi_exposure_training true
+
+train:
+  multi_exposure_training: *multi_exposure_training
+
+  optim_exp:
+    type: Adam
+    lr: 0.01
+    weight_decay: 0
+    betas: [0.9, 0.999]
+
+  scheduler_exp:
+    type: CosineAnnealingRestartLR
+    periods: [30000]
+    eta_min: 0.0001

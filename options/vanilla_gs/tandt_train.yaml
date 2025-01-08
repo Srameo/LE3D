@@ -1,0 +1,15 @@
+base: options/vanilla_gs/base.yaml
+
+name: vanilla_gs/tandt_train
+
+datasets:
+  train:
+    name: tandt_train_train
+    scene_root: datasets/tandt_db/tandt/train
+
+  val:
+    name: tandt_train_val
+    scene_root: datasets/tandt_db/tandt/train
+
+network_g:
+  init_ply_path: datasets/tandt_db/tandt/train/sparse/0/points3D.ply

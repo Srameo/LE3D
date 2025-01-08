@@ -1,0 +1,165 @@
+pipe_type: LE3DPipeline
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+total_iters: &total_iters 30000
+
+datasets:
+  train:
+    type: ColmapDataset
+    image_dir: raw
+    image_suffix: dng
+    meta_dir: raw
+    max_width: 2016
+    llffhold: ~
+
+  val:
+    type: ColmapDataset
+    image_dir: raw
+    image_suffix: dng
+    meta_dir: raw
+    max_width: 2016
+    split: val
+    llffhold: 20
+
+network_g:
+  type: LE3DModel
+  multi_exposure_training: false
+  train_dataset: true
+  add_init_points:
+    N: ~
+    far_multiplier: 10.0
+    near_multiplier: 1.0
+    add_point_multiplier: 5
+    radius_decay: 0.9
+    fov_decay: 1.0
+    random_sample: true
+    init_opacity: 0.1
+  color_mlp_opt:
+    type: TinyColorMLP
+    in_feats: 16
+    dir_feats: 3
+    act: relu
+    mid_feats_list: [16]
+    out_feats: 3
+    final_bias: ~
+    final_act: torch.exp
+  color_feat_opt:
+    recalculate_color_by_pcd: true
+    min_color_dc: -5.0
+    feat_len: 16
+    feat_init_sigma: 0.001
+  densify_from_iter: 500
+  densify_until_iter: &densify_until_iter 15000
+  densification_interval: 100
+  densify_grad_threshold: 0.0002
+  opacity_reset_interval: &opacity_reset_interval 3000
+  prune_opacity_threshold: 0.005
+  percent_dense: 0.01
+  convert_SHs_python: true
+  densify_size_threshold: ~
+
+# path
+path:
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  optim_g:
+    type: Adam
+    lr: 0.0
+    eps: 1.0e-15
+    detailed_lr:
+      position:     0.00016
+      feature_dc:   0.002
+      feature_rest: 0.0001
+      opacity:      0.05
+      scaling:      0.005
+      rotation:     0.001
+    weight_decay: 0
+    betas: [0.9, 0.999]
+
+  optim_color_mlp:
+    type: Adam
+    lr: 1.0e-4
+    weight_decay: 0
+    betas: [0.9, 0.999]
+
+  scheduler:
+  - type: ExponentialLR
+    target: xyz
+    lr_init: 0.00016
+    lr_final: 0.0000016
+    lr_delay_steps: 0
+    lr_delay_mult: 0.01
+    max_steps: *total_iters
+  - type: CosineAnnealingRestartLRForTarget
+    target: f_dc
+    periods: [*total_iters]
+    eta_min: 0.00001
+  - type: CosineAnnealingRestartLRForTarget
+    target: f_rest
+    periods: [*total_iters]
+    eta_min: 0.00001
+
+  scheduler_color_mlp:
+    type: CosineAnnealingRestartLR
+    periods: [*total_iters]
+    eta_min: 0.00001
+
+  total_iter: *total_iters
+  warmup_iter: -1  # no warm up
+
+  # losses
+  pixel_opt:
+    type: RawnerfLoss
+    loss_weight: 1.0
+    reduction: mean
+    eps: 1.0e-3
+    loss_type: mse
+
+  reg_opts:
+  - type: TLogReg
+    loss_weight: 0.01
+  - type: DistortionReg
+    bins: 32
+    shape: [600, 800]
+    near_far: [0.2, 1000]
+    inter_weight: 1.0
+    intra_weight: 1.0
+    loss_weight: 0.1
+  - type: NearFarReg
+    loss_weight: 0.01
+    shape: [600, 800]
+    loss_func: 'lambda near, far: torch.log((far + 1.0e-3) / (near + 1.0e-3)) ** 2'
+
+# validation settings
+val:
+  render_depth: true
+  val_freq: [7000, 15000, 24000, 30000]
+  save_img: true
+  suffix: ~
+  save_as: jpg
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+
+    ssim: # metric name, can be arbitrary
+      type: calculate_ssim
+      crop_border: 0
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: [7000, 30000]
+  save_in_ply: true
+  use_tb_logger: true
+
+viewer:
+  type: Le3dViewer
+  update_freq: 1
+  port: 8097

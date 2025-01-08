@@ -1,0 +1,15 @@
+base: options/le3d/base_wme.yaml
+
+name: le3d/stove
+
+datasets:
+  train:
+    name: rawnerf_stove_train
+    scene_root: datasets/rawnerf/scenes/stove_pinhole
+
+  val:
+    name: rawnerf_stove_val
+    scene_root: datasets/rawnerf/scenes/stove_pinhole
+
+network_g:
+  init_ply_path: datasets/rawnerf/scenes/stove_pinhole/sparse/0/points3D.ply

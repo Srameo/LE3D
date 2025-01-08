@@ -1,0 +1,15 @@
+base: options/vanilla_gs/base.yaml
+
+name: vanilla_gs/db_playroom
+
+datasets:
+  train:
+    name: db_playroom_train
+    scene_root: datasets/tandt_db/db/playroom
+
+  val:
+    name: db_playroom_val
+    scene_root: datasets/tandt_db/db/playroom
+
+network_g:
+  init_ply_path: datasets/tandt_db/db/playroom/sparse/0/points3D.ply

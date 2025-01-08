@@ -1,0 +1,15 @@
+base: options/le3d/base.yaml
+
+name: le3d/scooter
+
+datasets:
+  train:
+    name: rawnerf_scooter_train
+    scene_root: datasets/rawnerf/scenes/scooter_pinhole
+
+  val:
+    name: rawnerf_scooter_val
+    scene_root: datasets/rawnerf/scenes/scooter_pinhole
+
+network_g:
+  init_ply_path: datasets/rawnerf/scenes/scooter_pinhole/sparse/0/points3D.ply

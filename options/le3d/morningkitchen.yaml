@@ -1,0 +1,15 @@
+base: options/le3d/base.yaml
+
+name: le3d/morningkitchen
+
+datasets:
+  train:
+    name: rawnerf_morningkitchen_train
+    scene_root: datasets/rawnerf/scenes/morningkitchen_pinhole
+
+  val:
+    name: rawnerf_morningkitchen_val
+    scene_root: datasets/rawnerf/scenes/morningkitchen_pinhole
+
+network_g:
+  init_ply_path: datasets/rawnerf/scenes/morningkitchen_pinhole/sparse/0/points3D.ply

@@ -1,0 +1,15 @@
+base: options/vanilla_gs/base.yaml
+
+name: vanilla_gs/tandt_truck
+
+datasets:
+  train:
+    name: tandt_truck_train
+    scene_root: datasets/tandt_db/tandt/truck
+
+  val:
+    name: tandt_truck_val
+    scene_root: datasets/tandt_db/tandt/truck
+
+network_g:
+  init_ply_path: datasets/tandt_db/tandt/truck/sparse/0/points3D.ply

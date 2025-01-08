@@ -1,0 +1,14 @@
+torch==1.12.1
+torchvision==0.13.1
+numpy<2.0
+pyyaml
+plyfile
+viser
+tqdm
+rawpy
+opencv-python
+matplotlib
+tensorboard
+kornia
+imageio[ffmpeg]
+ipdb

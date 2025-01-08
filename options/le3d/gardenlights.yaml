@@ -1,0 +1,15 @@
+base: options/le3d/base.yaml
+
+name: le3d/gardenlights
+
+datasets:
+  train:
+    name: rawnerf_gardenlights_train
+    scene_root: datasets/rawnerf/scenes/gardenlights_pinhole
+
+  val:
+    name: rawnerf_gardenlights_val
+    scene_root: datasets/rawnerf/scenes/gardenlights_pinhole
+
+network_g:
+  init_ply_path: datasets/rawnerf/scenes/gardenlights_pinhole/sparse/0/points3D.ply
