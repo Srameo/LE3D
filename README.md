@@ -4,7 +4,7 @@
   </a>
 </p>
 
-## <div align="center"><a href="https://srameo.github.io/projects/le3d/">Web Viewer</a> | <a href="https://srameo.github.io/projects/le3d/intro.html">Homepage</a> | <a href="https://arxiv.org/abs/2406.06216">Paper</a> | Google Drive (TBD) | <a href="docs/editor.md">Editor</a> | <a href="docs/README_cn.md">中文版</a>
+## <div align="center"><a href="https://srameo.github.io/projects/le3d/">Web Viewer</a> | <a href="https://srameo.github.io/projects/le3d/intro.html">Homepage</a> | <a href="https://arxiv.org/abs/2406.06216">Paper</a> | <a href="https://drive.google.com/drive/folders/1dJLT7YDHs28aKG0sRmmUm5Qeusp_37r0?usp=drive_link"> Google Drive</a> | <a href="docs/editor.md">Editor</a> | <a href="docs/README_cn.md">中文版</a>
 <div align="center">
 
 :newspaper: [**News**](#newspaper-news) | :wrench: [**Install**](#wrench-dependencies-and-installation) | :tv:[**Quick Demo**](https://srameo.github.io/projects/le3d/) | :camera: [Training and Editing](#camera-training-and-editing) | :construction: [**Contribute**](docs/develop.md) | :scroll: [**License**](#scroll-license) | :question:[**FAQ**](https://github.com/Srameo/LE3D/issues?q=label%3AFAQ+)
@@ -46,6 +46,7 @@ Want to make your own 3D video story board? Please refer to [LE3D Editor](docs/e
 > Future work can be found in [todo.md](docs/todo.md).
 
 <ul>
+  <li><b>Jan 15, 2025</b>: Update pretrained scenes on the <a href="https://bmild.github.io/rawnerf/">RawNeRF</a> dataset, can be seen in <a href="https://drive.google.com/drive/folders/1dJLT7YDHs28aKG0sRmmUm5Qeusp_37r0?usp=drive_link"> Google Drive</a>.</li>
   <li><b>Jan 8, 2025</b>: Code released.</li>
   <li><b>Jan 3, 2025</b>: Release a <a href="https://srameo.github.io/projects/le3d/">web demo</a> for LE3D! you could view your own recontructed HDR scene in real-time! Codes on <a href="https://github.com/Srameo/hdr-splat">hdr-splat</a>.</li>
   <li><b>Oct 10, 2024</b>: LE3D is accepted by NIPS 2024!</li>
@@ -174,6 +175,7 @@ We provide two ways for share your reconstructed HDR scene on social media.
     # e.g.
     bash scripts/export_splat.sh output/le3d/bikes        latest
     ```
+    Then you could run `python -m http.server ./output/splat/bikes` to start a viewer for the reconstructed scenes.<br/>
     Selected scenes can be found in our [web viewer](https://srameo.github.io/projects/le3d/).
 2. Use the [LE3D Editor](docs/editor.md) to create a video story board and share it on social media.
 

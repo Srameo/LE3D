@@ -1,0 +1,15 @@
+base: options/le3d/base.yaml
+
+name: le3d/streetcorner
+
+datasets:
+  train:
+    name: rawnerf_streetcorner_train
+    scene_root: datasets/rawnerf/scenes/streetcorner_pinhole
+
+  val:
+    name: rawnerf_streetcorner_val
+    scene_root: datasets/rawnerf/scenes/streetcorner_pinhole
+
+network_g:
+  init_ply_path: datasets/rawnerf/scenes/streetcorner_pinhole/sparse/0/points3D.ply
