@@ -147,7 +147,7 @@ class SSIMLoss(nn.Module):
             weight (Tensor, optional): of shape (N, C, H, W). Element-wise weights. Default: None.
         """
         pred = pred.clip(None, 1)
-        l = (1 - _ssim_map_pth(pred, target))
+        l = (1 - _ssim_map_pth(pred * 255., target * 255.))
         l = weight_reduce_loss(l, weight, reduction=self.reduction)
         return self.loss_weight * l
 
